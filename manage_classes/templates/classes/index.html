@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% load staticfiles %}
+
+
+    <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Class List </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-wrench"></i></a>
+                        <ul role="menu" class="dropdown-menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                   
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                           
+                            <th class="column-title">Class Name </th>
+                            
+                            
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            
+                          </tr>
+                        </thead>
+
+                        <tbody>
+						{% if classes %}
+							{% for class in classes %}
+							  <tr class="even pointer">
+							   
+								<td class=" ">{{ class.class_name }}</td>
+								<td class=" last"><a href="{% url 'manage_classes:deleteclass' class.id %}" class="confirmation">Delete</a> | <a href="{% url 'manage_classes:editclass' class.id %}">Edit</a>
+								
+							  </tr>
+						  {% endfor %}
+                        {% else %}
+							<tr class="even pointer">
+							<td colspan="3">No class in List</td>
+							</tr>
+						{% endif %} 
+                        </tbody>
+                      </table>
+                    </div>
+					<div class="col-md-9 pagination">
+						<span class="step-links">
+							{% if classes.has_previous %}
+								<a href="?page={{ classes.previous_page_number }}">previous</a>
+							{% endif %}
+
+							<span class="current">
+								Page {{ classes.number }} of {{ classes.paginator.num_pages }}.
+							</span>
+
+							{% if classes.has_next %}
+								<a href="?page={{ classes.next_page_number }}">next</a>
+							{% endif %}
+						</span>
+					</div>
+					<div class="col-md-3 right">
+					<a href="{% url 'manage_classes:addclass'%}" class="btn btn-success right">Add Class</a>
+					</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <!-- /page content -->
+{% endblock %}
