@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% load staticfiles %}
+
+
+    <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Teachers List </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-wrench"></i></a>
+                        <ul role="menu" class="dropdown-menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                   
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                           
+                            <th class="column-title">Teacher Name </th>
+                            <th class="column-title">Qualification </th>
+                            <th class="column-title">City </th>
+                            <th class="column-title">State </th>
+                            <th class="column-title">Phone Number </th>
+                            <th class="column-title">Expeirience </th>
+                            <th class="column-title">Address </th>
+                            
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            
+                          </tr>
+                        </thead>
+
+                        <tbody>
+						{% if teachers %}
+							{% for teacher in teachers %}
+							  <tr class="even pointer">
+							   
+								<td class=" ">{{ teacher.name }}</td>
+								<td class=" ">{{ teacher.qualification }}</td>
+								<td class=" ">{{ teacher.city }}</td>
+								<td class=" ">{{ teacher.state }}</td>
+								<td class=" ">{{ teacher.phone_number }}</td>
+								<td class=" ">{{ teacher.experience }}</td>
+								<td class=" ">{{ teacher.address }}</td>
+								<td class=" last"><a href="{% url 'teachers:deleteteacher' teacher.id %}" class="confirmation">Delete</a> | <a href="{% url 'teachers:editteacher' teacher.id %}">Edit</a>
+								</td>
+							  </tr>
+						  {% endfor %}
+                        {% else %}
+							<tr class="even pointer">
+							<td colspan="3">No teacher in List</td>
+							</tr>
+						{% endif %} 
+                        </tbody>
+                      </table>
+                    </div>
+					<div class="col-md-9 pagination">
+						<span class="step-links">
+							{% if teachers.has_previous %}
+								<a href="?page={{ teachers.previous_page_number }}">previous</a>
+							{% endif %}
+
+							<span class="current">
+								Page {{ teachers.number }} of {{ teachers.paginator.num_pages }}.
+							</span>
+
+							{% if teachers.has_next %}
+								<a href="?page={{ teachers.next_page_number }}">next</a>
+							{% endif %}
+						</span>
+					</div>
+					<div class="col-md-3 right">
+					<a href="{% url 'teachers:addteacher'%}" class="btn btn-success right">Add Teacher</a>
+					</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <!-- /page content -->
+{% endblock %}
