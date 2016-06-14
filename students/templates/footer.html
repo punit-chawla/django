@@ -1,0 +1,61 @@
+		{% load staticfiles %}
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<nav class="footer-main">
+						  <ul>
+						  <li><a href="#">Download T&amp;Cs</a></li>
+						  <li><a href="#">Privacy Policy</a></li> 
+						  <li><a href="#">Contact</a></li> 
+						  </ul>
+						</nav>
+					</div>
+					<div class="col-md-6">
+						<div class="copy-write"> website designed by : CMee ltd 2015 </div>
+					</div> 
+				</div>
+			</div>
+		</footer>   
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+		<script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#uploadTrigger").click(function(){
+				$("#uploadFile").click();
+			});
+		});
+		function customCheckbox(checkboxName){
+			var checkBox = $('input[name="'+ checkboxName +'"]');
+			$(checkBox).each(function(){
+				$(this).wrap( "<span class='custom-checkbox'></span>" );
+				if($(this).is(':checked')){
+					$(this).parent().addClass("selected");
+				}
+			});
+			$(checkBox).click(function(){
+				$(this).parent().toggleClass("selected");
+			});
+		}
+		$(document).ready(function (){
+			customCheckbox("sport[]");
+			customCheckbox("car[]");
+			customCheckbox("confirm");
+		});
+		$(document).ready(function(){
+			$("#uploadTrigger").click(function(){
+				$("#uploadFile").click();
+			});
+		});
+		
+	$('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+
+		</script>
+	</body>
+</html>
